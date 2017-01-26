@@ -4,8 +4,8 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public class MuseIO : MonoBehaviour
-{
+public class MuseIO : MonoBehaviour {
+
 	public OscIn oscIn;
 	public int MusePort = 5000;
 
@@ -36,8 +36,8 @@ public class MuseIO : MonoBehaviour
 	 *  Unity Engine
 	 ********************************************************************/
 
-	void Start()
-	{
+	void Start() {
+
 		if( !oscIn ) oscIn = gameObject.AddComponent<OscIn>();
 		oscIn.Open( MusePort );
 	
@@ -97,8 +97,7 @@ public class MuseIO : MonoBehaviour
 	}
 
 
-	void OnDisable()
-	{
+	void OnDisable() {
 		oscIn.Unmap(OnHorseShoe);
 		oscIn.Unmap(OnSignalStatus);
 
@@ -137,23 +136,10 @@ public class MuseIO : MonoBehaviour
 
 
 	/********************************************************************
-	 *  Example: sonic meditation
+	 *  helpers
 	 ********************************************************************/
 
-	void Update()
-	{
-		Spectrum spectrum = GetComponentInChildren<Spectrum> ();
-		Camera camera = GetComponent<Camera> ();
-		spectrum.Series(Relative, SignalStatus, camera);
-	}
-
-
-	/********************************************************************
-	 *  local helpers
-	 ********************************************************************/
-
-	void Test( OscMessage message )
-	{
+	void Test( OscMessage message ) {
 		Debug.Log( message );
 
 		int i = 0;
@@ -165,8 +151,7 @@ public class MuseIO : MonoBehaviour
 	}
 
 
-	void ParseInt(int[] target, OscMessage message)
-	{
+	void ParseInt(int[] target, OscMessage message) {
 		int i = 0;
 		foreach (object o in message.args) {
 			if (i < target.Length) {
@@ -180,8 +165,7 @@ public class MuseIO : MonoBehaviour
 	}
 
 
-	void ParseFloat(float[] target, OscMessage message)
-	{
+	void ParseFloat(float[] target, OscMessage message) {
 		int i = 0;
 		foreach (object o in message.args) {
 			if (i < target.Length) {
